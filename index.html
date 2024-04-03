@@ -141,25 +141,40 @@
       }
 
       work() {
-        this.ants.forEach(ant => ant.health -= 20);
-        this.ants = this.ants.filter(ant => ant.health > 0);
+        // Save the starting count of ants before any work is done
+        const startingCount = this.ants.length;
 
-        if (this.ants.length === 0) {
-          return "No ants here. Did you work them to death?";
+       
+        // Filter out ants with health 0 or less
+        if (!startingCount) {
+          return "No ants here. Did you work them to death?"
         }
-        return `${this.ants.length} ants starting work!`;
-      }
+        this.ants = this.ants.map(ant =>{ 
+          ant.health -= 20
+          return ant
+        });
+
+        this.ants = this.ants.filter( ant => {
+          return ant.health > 0
+        })
+        if (this.ants.length === 1){
+          return `${startingCount} ants left after starting work!`
+        }else {
+          return `${startingCount} ant left after starting work!`
+        }
+        }
+      
 
       feed(name) {
-        let found = false;
+        let count = 0;
         this.ants = this.ants.map(ant => {
           if (ant.name === name) {
-            found = true;
-            return { ...ant, health: ant.health + 15 };
+            count++
+            ant.health += 15
           }
-          return ant;
-        });
-        return found ? "Yum!" : `${name} not found!`;
+          return ant
+        })
+        return count ? "Yum!" : `${name} not found!`;
       }
     }
 
@@ -391,7 +406,7 @@
         },
         function () {
           let actual, description = 'Working returns the correct string'
-          let expected = ["3 ants starting work!", "1 ant starting work!", "No ants here. Did you work them to death?"]
+          let expected = ["3 ants left after starting work!", "1 ant left after starting work!", "No ants here. Did you work them to death?"]
           try {
             const farm = new AntFarm('Jess', 'Blake', 'Jess')
             farm.ants[0].health++
