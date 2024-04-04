@@ -158,10 +158,11 @@
           return ant.health > 0
         })
         if (this.ants.length === 1){
-          return `${startingCount} ants left after starting work!`
+          return `${startingCount} ants starting work!`
         }else {
-          return `${startingCount} ant left after starting work!`
+          return `${startingCount} ants starting work!`
         }
+
         }
       
 
@@ -178,7 +179,7 @@
       }
     }
 
-    // 🧪 TESTS, do not make any changes below this line ===================
+   // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
     globalThis.challengeVersion = 1
@@ -406,7 +407,7 @@
         },
         function () {
           let actual, description = 'Working returns the correct string'
-          let expected = ["3 ants left after starting work!", "1 ant left after starting work!", "No ants here. Did you work them to death?"]
+          let expected = ["3 ants starting work!", "1 ants starting work!", "No ants here. Did you work them to death?"]
           try {
             const farm = new AntFarm('Jess', 'Blake', 'Jess')
             farm.ants[0].health++
